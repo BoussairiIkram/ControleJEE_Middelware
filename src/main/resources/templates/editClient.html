@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout"
+      layout:decorate="navbarTemp">
+
+<head>
+  <meta charset="UTF-8">
+  <title>edit Client</title>
+  <Link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+</head>
+<body>
+
+<div layout:fragment="content1">
+  <div class="col-md-4 offset-4 mt-4">
+    <form method="post" th:action="@{/save(page=${page}, keyword=${keyword})}">
+
+      <div  class="mt-4">
+        <label>Id  </label>
+        <label th:text="${client.id}"> </label>
+        <input class="form-control" type="hidden" name="id" th:value="${client.id}">
+      </div>
+
+      <div  class="mt-4">
+        <label>Nom</label>
+        <input class="form-control" type="text" name="nom" th:value="${client.nom}">
+        <span class="text-danger" th:errors="${client.nom}"></span>
+      </div>
+      <div  class="mt-4">
+        <label>UserName</label>
+        <input class="form-control" type="text" name="username" th:value="${client.username}">
+        <span class="text-danger" th:errors="${client.username}"></span>
+      </div>
+      <div  class="mt-4">
+        <label>Email</label>
+        <input class="form-control" type="text" name="email" th:value="${client.email}">
+        <span class="text-danger" th:errors="${client.email}"></span>
+      </div>
+
+
+      <div class="offset-5 mt-4">
+        <button type="submit" class="btn btn-primary "> save</button>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

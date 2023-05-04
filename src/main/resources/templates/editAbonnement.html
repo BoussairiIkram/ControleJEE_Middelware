@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout"
+      layout:decorate="navbarTemp">
+
+<head>
+  <meta charset="UTF-8">
+  <title>edit Abonnement</title>
+  <Link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+</head>
+<body>
+
+<div layout:fragment="content1">
+  <div class="col-md-4 offset-4 mt-4">
+    <form method="post" th:action="@{/saveAbonnement(clientId=${abonnement.getClient().getId()})}">
+
+      <div  class="mt-4">
+        <label>Id : </label>
+        <label th:text="${abonnement.id}"> </label>
+        <input class="form-control" type="hidden" name="id" th:value="${abonnement.id}">
+      </div>
+
+        <div  class="mt-4">
+            <label>Type Abonnement : </label>
+            <label th:text="${abonnement.typeAbonnement}"> </label>
+            <input class="form-control" type="hidden" name="typeAbonnement" th:value="${abonnement.typeAbonnement}">
+        </div>
+
+        <div  class="mt-4">
+            <label>Date Abonnement : </label>
+            <label th:text="${abonnement.dateAbonnement.toString()}"> </label>
+            <input class="form-control" type="hidden" name="dateAbonnement" th:value="${abonnement.dateAbonnement}">
+        </div>
+
+      <div  class="mt-4">
+        <label>Solde</label>
+        <input class="form-control" type="number" step="any" name="soldeAbonnement" th:value="${abonnement.soldeAbonnement}">
+        <span class="text-danger" th:errors="${abonnement.soldeAbonnement}"></span>
+      </div>
+
+      <div  class="mt-4">
+        <label>Montant Mensuel</label>
+        <input class="form-control" type="number" step="any" name="montantMensuel" th:value="${abonnement.montantMensuel}">
+        <span class="text-danger" th:errors="${abonnement.montantMensuel}"></span>
+      </div>
+
+
+
+      <div class="offset-5 mt-4">
+        <button type="submit" class="btn btn-primary "> saveAbonnement</button>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

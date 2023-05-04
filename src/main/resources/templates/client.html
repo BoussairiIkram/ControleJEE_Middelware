@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout"
+      layout:decorate="navbarTemp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Client</title>
+    <Link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+    <Link rel="stylesheet" href="/webjars/bootstrap-icons/1.10.3/font/bootstrap-icons.css">
+
+</head>
+<body>
+<div layout:fragment="content1">
+<div>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                liste des clients
+            </div>
+            <div class="card-body">
+                <form method="get" th:action="@{/index}">
+                    <label>keyword</label>
+                    <input type="text" name="keyword" th:value="${keyword}">
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                </form>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>UserName</th>
+                        <th>email</th>
+                        <th>Abonnement</th>
+
+                    </tr>
+                    </thead>
+                    <tbo>
+                        <tr th:each="c:${listClient}">
+                            <td th:text="${c.getId()}"></td>
+                            <td th:text="${c.getNom()}"></td>
+                            <td th:text="${c.getEmail()}"></td>
+                            <td th:text="${c.getUsername()}"></td>
+                            <td>
+                                <a  th:href="@{/abonnement(id=${c.id})}" type="button" class="btn btn-outline-primary">Abonnement <i class="bi bi-caret-right"></i></a>
+                            </td>
+
+                            <td>
+                                <a th:href="@{/editClient(id=${c.getId()}, keyword=${keyword}, page=${currentPage})}" class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                            </td>
+
+                            <td>
+                                <a  onclick="return confirm('etes vous sure?')"
+                                      th:href="@{/delete(id=${c.id}, keyword=${keyword}, page=${currentPage})}" class="btn btn-danger"><i class="bi bi-trash3"></i></a>
+                            </td>
+
+                        </tr>
+                    </tbo>
+                </table>
+                <ul class="nav nav-pills">
+                    <li th:each="page,status:${pages}">
+                        <a th:class="${status.index==currentPage?'btn btn-primary ms-1' : 'btn btn-outline-primary ms-1'}"
+                           th:text="${status.index}"
+                           th:href="@{index(page=${status.index}, keyword=${keyword})}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
